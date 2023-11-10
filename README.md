@@ -4,7 +4,7 @@
 
  - Spring Boot Version: 2.7.1.7. Latest available for 2.x
  - JDK 11
- - Spring Kafka: 2.8.11. This version ships Apache Kafka 3.0.2. There is no version available for Apache Kafka 3.1, version shipped in Confluent Platform 7.1
+ - Spring Kafka: 2.8.11. This version ships Apache Kafka 3.1.2, version shipped in Confluent Platform 7.1.1
 
 To run CP demo:
 
@@ -16,6 +16,8 @@ CP demo will start up:
 
  - broker listening on port 9092 with ACL
  - schema registry listening on port 8081
+ - Read and Write permission on topic orders for user "alice"
+ - Read permission on group order-app-group for user "alice"
 
 
 # How to run on local
@@ -39,10 +41,6 @@ mvn spring-boot:run
 
 # Publish orders: topic orders
 curl --data '{"id":5, "name": "PS5"}' -H "Content-Type:application/json" http://localhost:8010/api/order
-
-# Publish orders, simulating an ERROR: topic orders
-curl --data '{"id":5, "name": "ERROR-PS5"}' -H "Content-Type:application/json" http://localhost:8010/api/order
-----
 ```
 
 ## Teardown

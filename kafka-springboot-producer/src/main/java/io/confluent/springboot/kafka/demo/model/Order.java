@@ -5,9 +5,7 @@ import java.io.Serializable;
 public class Order implements Serializable {
 
     private Long id;
-
     private String name;
-
 
     public Long getId() {
         return id;

@@ -1,0 +1,15 @@
+server:
+  port: 8090
+spring:
+  kafka:
+    topic:
+      name: orders
+    bootstrap-servers: localhost:9092
+    group-id: order-app-group
+    auto-offset-reset: earliest
+    key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    properties:
+      security.protocol: SASL_PLAINTEXT
+      sasl.mechanism: PLAIN
+      sasl.jaas.config: org.apache.kafka.common.security.plain.PlainLoginModule required username="alice" password="alice-secret";
