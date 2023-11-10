@@ -26,31 +26,6 @@ spec:
             configMapKeyRef:
                name:  kafka-consumer-service-cm
                key: topic-name
-        - name: spring.data.mongodb.host
-          valueFrom:
-            configMapKeyRef:
-               name:  kafka-consumer-service-cm
-               key: spring.data.mongodb.host
-        - name: spring.data.mongodb.port
-          valueFrom:
-            configMapKeyRef:
-               name:  kafka-consumer-service-cm
-               key: spring.data.mongodb.port
-        - name: spring.data.mongodb.database
-          valueFrom:
-            configMapKeyRef:
-               name:  kafka-consumer-service-cm
-               key: spring.data.mongodb.database
-        - name: spring.data.mongodb.username
-          valueFrom:
-            configMapKeyRef:
-               name:  kafka-consumer-service-cm
-               key: spring.data.mongodb.username
-        - name: spring.data.mongodb.password
-          valueFrom:
-            configMapKeyRef:
-               name:  kafka-consumer-service-cm
-               key: spring.data.mongodb.password
         - name: JAVA_OPTIONS
           value: "-Dspring.profiles.active=openshift"
         readinessProbe:
