@@ -1,4 +1,0 @@
-org/hifly/demo/kafka/KafkaApplication.class
-org/hifly/demo/kafka/kafka/KafkaProducerConfig.class
-org/hifly/demo/kafka/model/Order.class
-org/hifly/demo/kafka/controller/KafkaRestController.class
