@@ -98,4 +98,3 @@ hs_err_pid*
 
 kafka-springboot-consumer/target/
 kafka-springboot-producer/target/
-cp/
