@@ -1,0 +1,15 @@
+{
+  "namespace": "io.confluent.springboot.kafka.demo.model",
+  "type": "record",
+  "name": "Order",
+  "fields": [
+    {
+      "name": "name",
+      "type": "string"
+    },
+    {
+      "name": "id",
+      "type": "long"
+    }
+  ]
+}

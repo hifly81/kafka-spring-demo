@@ -1,11 +1,12 @@
 package io.confluent.springboot.kafka.demo.controller;
 
-import io.confluent.springboot.kafka.demo.model.Order;
 import io.confluent.springboot.kafka.demo.producer.Producer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import io.confluent.springboot.kafka.demo.model.Order;
 
 @RestController
 public class KafkaController {

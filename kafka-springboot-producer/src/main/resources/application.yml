@@ -5,9 +5,11 @@ spring:
     topic:
       name: orders
     bootstrap-servers: localhost:9092
-    key-serializer: org.apache.kafka.common.serialization.StringDeserializer
-    value-serializer: org.apache.kafka.common.serialization.StringDeserializer
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
     properties:
+      schema.registry.url: http://localhost:8081
       security.protocol: SASL_PLAINTEXT
       sasl.mechanism: PLAIN
       sasl.jaas.config: org.apache.kafka.common.security.plain.PlainLoginModule required username="alice" password="alice-secret";
