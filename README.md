@@ -96,7 +96,7 @@ curl --data '{"id":5, "name": "PS5"}' -H "Content-Type:application/json" http://
 2023-11-14 00:48:21.687 ERROR 31012 --- [3-retry-2-0-C-1] k.r.DeadLetterPublishingRecovererFactory : Record: topic = orders_v2-retry-2, partition = 0, offset = 1, main topic = orders_v2 threw an error at topic orders_v2-retry-2 and won't be retried. Sending to DLT with name orders_v2-dlt.
 ```
 
-### NPE not retriable and sent do DLT
+### NPE not retriable and sent to DLT
 
 This configuration will not retry messages for _NPE_ but those will be sent directly to _DLT_.
 
