@@ -16,11 +16,7 @@ CP demo will start up:
 
  - broker listening on port _9092_ with ACL
  - schema registry listening on port _8081_
- - Read and Write permission on topic _orders_ for user _alice_
- - Read and Write permission on topic _orders_v2_ for user _alice_
- - Read and Write permission on topic _DLT.orders_v2_ for user _alice_
- - Read permission on group _order-app-group_ for user _alice_
- - Read permission on group _DLT.order-app-group_ for user _alice_
+ - Add ACLs for user _alice_
 
 
 # How to run on local
