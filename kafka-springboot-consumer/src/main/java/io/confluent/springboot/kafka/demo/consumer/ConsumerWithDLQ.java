@@ -36,7 +36,7 @@ public class ConsumerWithDLQ {
             exclude = NullPointerException.class)
     @KafkaListener(topics = "${spring.kafka.topic.name}" + "_v2", groupId = "${spring.kafka.consumer.group-id}" + "_v2")
     public void listen(ConsumerRecord<String, Order> record, @Header(KafkaHeaders.RECEIVED_TOPIC) String topic, @Header("X-Custom-Header") String customHeader) {
-        logger.info(record + " from " + topic);
+        logger.info(String.format("#### -> Consumed message -> %s", record));
 
         if(customHeader != null && customHeader.equalsIgnoreCase("NPE"))
             processHandler.generateNPE("I'm a NPE");
@@ -46,7 +46,7 @@ public class ConsumerWithDLQ {
 
     @DltHandler
     public void dlt(ConsumerRecord<String, Order> record, @Header(KafkaHeaders.RECEIVED_TOPIC) String topic) {
-        logger.info(record + " from " + topic);
+        logger.info(String.format("#### -> DLT Consumed message -> %s", record));
     }
 
 }
