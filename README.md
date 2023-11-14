@@ -85,7 +85,7 @@ curl --data '{"id":5, "name": "PS5"}' -H "Content-Type:application/json" http://
 Based on the work at:
 https://github.com/eugene-khyst/spring-kafka-non-blocking-retries-and-dlt
 
-This implementation (class _ConsumerWithDLQ_) configure 3 retriable topics, _orders_v2-retry-0_ _(backoff 2 seconds)_, _orders_v2-retry-1_ _(backoff 4 seconds)_, _orders_v2-retry-2_ _(backoff 8 seconds)_ and a DLT topic, _orders_v2-dlt_, for the main topic _orders_v2_.
+This implementation (class _ConsumerWithDLQ_) configure 3 retriable topics, _orders_v2-retry-0_ _(backoff 1 seconds)_, _orders_v2-retry-1_ _(backoff 2 seconds)_, _orders_v2-retry-2_ _(backoff 4 seconds)_ and a _DLT_ topic, _orders_v2-dlt_, for the main topic _orders_v2_.
 
 Offending messages will be retried without blocking consuming of messages.
 After exhausting the retries, messages will be sent to _DLT_.
