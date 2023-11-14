@@ -3,25 +3,25 @@
 # Pre Requisites
 
  - Spring Boot Version: 2.7.1.7. Latest available for 2.x
+ - Spring Kafka: 2.8.11. This version ships Apache Kafka 3.1.2, version shipped in Confluent Platform 7.1.1.
  - JDK 11
- - Spring Kafka: 2.8.11. This version ships Apache Kafka 3.1.2, version shipped in Confluent Platform 7.1.1
 
 To run CP demo:
 
  - Docker engine version _20.10.12_
  - Docker Compose version _2.4.1_
- - Java version _11.0.8_
+ - JDK 11 version _11.0.8_
 
 CP demo will start up:
 
- - broker listening on port _9092_ with ACL
+ - broker listening on port _9092_ with authorizer based on ACLs
  - schema registry listening on port _8081_
- - Add ACLs for user _alice_
+ - ACLs added for user _alice/alice-secret_
 
 
 # How to run on local
 
-## Start CP demo version 7.1.1
+## Start CP demo
 
 ```bash
 cp/start.sh
