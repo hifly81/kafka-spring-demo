@@ -114,7 +114,7 @@ This configuration will not retry messages for _NPE_ but those will be sent dire
 curl --data '{"id":5, "name": "PS5"}' -H "Content-Type:application/json" http://localhost:8010/api/v2/order/npe
 ```
 
-2. Verify consuming on consumer log and on orders_v2-dlt_ topics:
+2. Verify consuming on consumer log and on _orders_v2-dlt_ topics:
 
 ```bash
 2023-11-14 12:40:37.350  INFO 59124 --- [ntainer#1-0-C-1] i.c.s.k.demo.consumer.ConsumerWithDLQ    : ConsumerRecord(topic = orders_v2, partition = 0, leaderEpoch = 0, offset = 1, CreateTime = 1699962037313, serialized key size = 1, serialized value size = 10, headers = RecordHeaders(headers = [RecordHeader(key = X-Custom-Header, value = [78, 80, 69])], isReadOnly = false), key = 5, value = {"name": "PS5", "id": 5}) from orders_v2
