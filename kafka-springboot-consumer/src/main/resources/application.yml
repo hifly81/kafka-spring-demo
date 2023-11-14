@@ -10,6 +10,8 @@ spring:
       value-deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
       group-id: order-app-group
       auto-offset-reset: earliest
+      backoff-interval: 15000
+      backoff-max_failure: 2
     # Needed for DLT Producer
     producer:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
