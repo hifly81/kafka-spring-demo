@@ -32,11 +32,16 @@ public class ConsumerWithDLQ {
             attempts = "4",
             backoff = @Backoff(delay = 1000, multiplier = 2.0),
             autoCreateTopics = "false",
-            topicSuffixingStrategy = TopicSuffixingStrategy.SUFFIX_WITH_INDEX_VALUE)
+            topicSuffixingStrategy = TopicSuffixingStrategy.SUFFIX_WITH_INDEX_VALUE,
+            exclude = NullPointerException.class)
     @KafkaListener(topics = "${spring.kafka.topic.name}" + "_v2")
-    public void listen(ConsumerRecord<String, Order> record, @Header(KafkaHeaders.RECEIVED_TOPIC) String topic) {
+    public void listen(ConsumerRecord<String, Order> record, @Header(KafkaHeaders.RECEIVED_TOPIC) String topic, @Header("X-Custom-Header") String customHeader) {
         logger.info(record + " from " + topic);
-        processHandler.generateException("I'm an Exception v2");
+
+        if(customHeader != null && customHeader.equalsIgnoreCase("NPE"))
+            processHandler.generateNPE("I'm a NPE");
+        else
+            processHandler.generateException("I'm an Exception v2");
     }
 
     @DltHandler

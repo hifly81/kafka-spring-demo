@@ -9,6 +9,10 @@ public class ProcessHandler {
         throw new RuntimeException(message);
     }
 
+    public void generateNPE(String message) {
+        throw new NullPointerException(message);
+    }
+
     public void execute(String message) {
         System.out.println("echo:" + message);
     }
