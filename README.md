@@ -31,12 +31,18 @@ cp/start.sh
 
 ### Producer
 
+Producer configurations with default values for CP 7.1 are visible at:
+https://docs.confluent.io/platform/7.1/installation/configuration/producer-configs.html
+
 ```bash
 cd kafka-springboot-producer
 mvn spring-boot:run
 ```
 
 ### Consumers
+
+Consumer configurations with default values for CP 7.1 are visible at:
+https://docs.confluent.io/platform/7.1/installation/configuration/consumer-configs.html
 
 ```bash
 cd kafka-springboot-consumer
