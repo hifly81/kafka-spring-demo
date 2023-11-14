@@ -56,7 +56,7 @@ cp/stop.sh
 
 ## Blocking Retries: DefaultErrorHandler
 
-The default behavior is attempting to consume one massage at most 10 times. After that the consumer will never process it again.
+The default behavior is attempting to consume one massage at most 10 times. After that the consumer will never process it again. Retries **are not handled in a non-blocking mode**.
 Reference class is: _org.springframework.kafka.listener.DefaultErrorHandler_.
 
 This implementation (class _ConsumerWithDefaultRetries_) overrides the default behaviour setting a max number for retries to 2 with a _backoff interval_ of 15 seconds.
@@ -87,7 +87,7 @@ https://github.com/eugene-khyst/spring-kafka-non-blocking-retries-and-dlt
 
 This implementation (class _ConsumerWithDLQ_) configure 3 retriable topics, _orders_v2-retry-0_ _(backoff 1 seconds)_, _orders_v2-retry-1_ _(backoff 2 seconds)_, _orders_v2-retry-2_ _(backoff 4 seconds)_ and a _DLT_ topic, _orders_v2-dlt_, for the main topic _orders_v2_.
 
-Offending messages will be retried without blocking consuming of messages.
+Offending messages will be retried **without blocking** consuming of messages.
 After exhausting the retries, messages will be sent to _DLT_.
 
 1. Place order on topic _orders_v2_:
