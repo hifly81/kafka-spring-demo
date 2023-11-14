@@ -45,9 +45,9 @@ mvn spring-boot:run
 cp/stop.sh
 ```
 
-# Error Handling on consumers
+# Error Handling and Retries on consumers
 
-## DefaultErrorHandler
+## Blocking Retries: DefaultErrorHandler
 
 The default behavior is attempting to consume one massage at most 10 times. After that the consumer will never process it again.
 Reference class is: _org.springframework.kafka.listener.DefaultErrorHandler_.
