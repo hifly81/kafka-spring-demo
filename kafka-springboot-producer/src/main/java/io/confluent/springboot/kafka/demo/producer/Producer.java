@@ -12,6 +12,9 @@ public class Producer {
     @Value("${spring.kafka.topic.name}")
     private String TOPIC;
 
+    @Value("${spring.kafka.topic.name}" + "_v2")
+    private String TOPIC_V2;
+
     private final KafkaTemplate<String, Order> kafkaTemplate;
 
     @Autowired
@@ -21,5 +24,9 @@ public class Producer {
 
     public void sendOrder(Order order) {
         this.kafkaTemplate.send(this.TOPIC, String.valueOf(order.getId()), order);
+    }
+
+    public void sendOrderV2(Order order) {
+        this.kafkaTemplate.send(this.TOPIC_V2, String.valueOf(order.getId()), order);
     }
 }

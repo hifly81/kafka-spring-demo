@@ -5,11 +5,11 @@ spring:
     topic:
       name: orders
     bootstrap-servers: localhost:9092
-    group-id: order-app-group
-    auto-offset-reset: earliest
     consumer:
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
+      group-id: order-app-group
+      auto-offset-reset: earliest
     # Needed for DLT Producer
     producer:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
