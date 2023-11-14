@@ -35,4 +35,10 @@ public class KafkaController {
         this.producer.sendOrderV2WithNPE(order);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    @PostMapping(value="/api/order/ko")
+    public ResponseEntity sendKO(@RequestBody Order order) {
+        this.producer.sendOrderKO(order);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }

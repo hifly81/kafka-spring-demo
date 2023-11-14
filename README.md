@@ -58,6 +58,50 @@ mvn spring-boot:run
 cp/stop.sh
 ```
 
+# Error Handling and Retries on producers
+
+Important configurations for error handling and retries on producing. Suggestion is to maintain the default value.
+
+ - _retries_: resend any record whose send fails with a potentially transient error. Note that this retry is no different than if the client resent the record upon receiving the error. Produce requests will be failed before the number of retries has been exhausted if the timeout configured by _delivery.timeout.ms_ expires first before successful acknowledgement. Users should generally prefer to leave this config unset and instead use _delivery.timeout.ms_ to control retry behavior. 
+ **Default:	2147483647**
+
+
+ - _delivery.timeout.ms_: An upper bound on the time to report success or failure after a call to _send()_ returns. This limits the total time that a record will be delayed prior to sending, the time to await acknowledgement from the broker (if expected), and the time allowed for retriable send failures. The producer may report failure to send a record earlier than this config if either an unrecoverable error is encountered, the retries have been exhausted, or the record is added to a batch which reached an earlier delivery expiration deadline. The value of this config should be greater than or equal to the sum of _request.timeout.ms_ and _linger.ms_.
+  **Default:	120000 (2 minutes)**
+
+ - _retry.backoff.ms_: The amount of time to wait before attempting to retry a failed request to a given topic partition. This avoids repeatedly sending requests in a tight loop under some failure scenarios.
+  **Default:	100**
+
+
+ - _enable.idempotence_: the producer will ensure that exactly one copy of each message is written in the stream. Note that enabling idempotence requires _max.in.flight.requests.per.connection_ to be less than or equal to 5 (with message ordering preserved for any allowable value), _retries_ to be greater than 0, and _acks_ must be 'all'.
+ **Default:	true**
+
+
+ - _max.in.flight.requests.per.connection_
+   The maximum number of unacknowledged requests the client will send on a single connection before blocking
+   **Default:	5**
+
+## Non Retriable Errors: Callback
+
+This implementation (class _Producer_) provides a callback (_onFailure_ method) that reacts on
+non retriable errors or if _retries_ are been exhausted.
+
+1. Place order on topic _orders_ko_ (_TopicNotFound_ or _TopicAuthorizationException_) and simulate an error:
+
+```bash
+curl --data '{"id":5, "name": "PS5"}' -H "Content-Type:application/json" http://localhost:8010/api/order/ko
+```
+
+```bash
+org.apache.kafka.common.errors.TopicAuthorizationException: Not authorized to access topics: [orders_ko]
+
+2023-11-14 15:09:06.593 ERROR 66091 --- [nio-8010-exec-1] i.c.s.kafka.demo.producer.Producer       : unable to send order: {"name": "PS5", "id": 5}
+
+org.springframework.kafka.KafkaException: Send failed; nested exception is org.apache.kafka.common.errors.TopicAuthorizationException: Not authorized to access topics: [orders_ko]
+at org.springframework.kafka.core.KafkaTemplate.doSend(KafkaTemplate.java:666) ~[spring-kafka-2.8.11.jar:2.8.11]
+at org.springframework.kafka.core.KafkaTemplate.send(KafkaTemplate.java:409) ~[spring-kafka-2.8.11.jar:2.8.11]
+```
+
 # Error Handling and Retries on consumers
 
 ## Blocking Retries: DefaultErrorHandler
@@ -74,7 +118,7 @@ _NPE_ will not be retried.
 curl --data '{"id":5, "name": "PS5"}' -H "Content-Type:application/json" http://localhost:8010/api/order
 ```
 
- 2. Verify consuming on consumer log and retries exhausted:
+ 2. Verify consuming on consumer log and retries exhausting:
 
 ```bash
 2023-11-14 11:53:37.071  INFO 57032 --- [ntainer#0-0-C-1] i.c.s.k.d.c.ConsumerWithDefaultRetries   : #### -> Consumed message -> ConsumerRecord(topic = orders, partition = 0, leaderEpoch = 0, offset = 1, CreateTime = 1699959216868, serialized key size = 1, serialized value size = 10, headers = RecordHeaders(headers = [], isReadOnly = false), key = 5, value = {"name": "PS5", "id": 5})
