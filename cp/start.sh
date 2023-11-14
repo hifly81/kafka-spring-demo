@@ -23,3 +23,9 @@ docker exec -it broker kafka-acls --bootstrap-server broker:29092 --add --allow-
 
 echo "Add ACLs on consumer groups for user alice"
 docker exec -it broker kafka-acls --bootstrap-server broker:29092 --add --allow-principal "User:alice" --operation Read --group order-app-group
+docker exec -it broker kafka-acls --bootstrap-server broker:29092 --add --allow-principal "User:alice" --operation Read --group order-app-group_v2
+docker exec -it broker kafka-acls --bootstrap-server broker:29092 --add --allow-principal "User:alice" --operation Read --group order-app-group_v2-retry-0
+docker exec -it broker kafka-acls --bootstrap-server broker:29092 --add --allow-principal "User:alice" --operation Read --group order-app-group_v2-retry-1
+docker exec -it broker kafka-acls --bootstrap-server broker:29092 --add --allow-principal "User:alice" --operation Read --group order-app-group_v2-retry-2
+docker exec -it broker kafka-acls --bootstrap-server broker:29092 --add --allow-principal "User:alice" --operation Read --group order-app-group_v2-dlt
+

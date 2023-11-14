@@ -34,7 +34,7 @@ public class ConsumerWithDLQ {
             autoCreateTopics = "false",
             topicSuffixingStrategy = TopicSuffixingStrategy.SUFFIX_WITH_INDEX_VALUE,
             exclude = NullPointerException.class)
-    @KafkaListener(topics = "${spring.kafka.topic.name}" + "_v2")
+    @KafkaListener(topics = "${spring.kafka.topic.name}" + "_v2", groupId = "${spring.kafka.consumer.group-id}" + "_v2")
     public void listen(ConsumerRecord<String, Order> record, @Header(KafkaHeaders.RECEIVED_TOPIC) String topic, @Header("X-Custom-Header") String customHeader) {
         logger.info(record + " from " + topic);
 
