@@ -52,8 +52,8 @@ cp/stop.sh
 The default behavior is attempting to consume one massage at most 10 times. After that the consumer will never process it again.
 Reference class is: _org.springframework.kafka.listener.DefaultErrorHandler_.
 
-This implementation overrides the default setting a max number for retries to 2 with a backoff interval of 15 seconds.
-NPE will not be retried.
+This implementation overrides the default behaviour setting a max number for retries to 2 with a _backoff interval_ of 15 seconds.
+_NPE_ will not be retried.
 
  1. Place order on topic _orders_:
 
@@ -98,7 +98,7 @@ curl --data '{"id":5, "name": "PS5"}' -H "Content-Type:application/json" http://
 
 ### NPE not retriable and sent do DLT
 
-This configuration will not retry messages for NPE but those will be sent directly to DLT.
+This configuration will not retry messages for _NPE_ but those will be sent directly to _DLT_.
 
 1. Place order on topic _orders_v2_:
 
